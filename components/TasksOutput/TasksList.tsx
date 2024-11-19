@@ -1,14 +1,14 @@
-import { FlatList, ListRenderItemInfo, StyleSheet, Text } from "react-native";
+import { FlatList, ListRenderItemInfo } from "react-native";
 
 import { ITask } from "../../@types/task";
-import { GlobalStyles } from "../../constants/styles";
+import TaskItem from "./TaskItem";
 
 interface TasksListProps {
   tasks: ITask[];
 }
 
 function renderTaskItem({ item }: ListRenderItemInfo<ITask>) {
-  return <Text style={styles.text}>{item.title}</Text>;
+  return <TaskItem item={item} />;
 }
 
 function TasksList({ tasks }: TasksListProps) {
@@ -22,9 +22,3 @@ function TasksList({ tasks }: TasksListProps) {
 }
 
 export default TasksList;
-
-const styles = StyleSheet.create({
-  text: {
-    color: GlobalStyles.colors.primary50,
-  },
-});
