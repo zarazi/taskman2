@@ -9,13 +9,13 @@ const DUMMY_TASKS: ITask[] = [
     id: "1",
     title: "Research todos app",
     description: "something worth spending ...",
-    status: "todo",
+    status: "done",
   },
   {
     id: "2",
     title: "Design app architecture",
     description: "something worth spending more ...",
-    status: "todo",
+    status: "in-progress",
   },
   {
     id: "3",
