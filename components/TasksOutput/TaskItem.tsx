@@ -8,8 +8,12 @@ interface TaskItemProps {
 }
 
 function TaskItem({ item }: TaskItemProps) {
+  function taskPressHandler() {}
   return (
-    <Pressable>
+    <Pressable
+      onPress={taskPressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.taskItem}>
         <View>
           <Text style={[styles.textBase, styles.title]}>{item.title}</Text>
@@ -28,6 +32,9 @@ function TaskItem({ item }: TaskItemProps) {
 export default TaskItem;
 
 const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.75,
+  },
   taskItem: {
     padding: 12,
     marginVertical: 8,
