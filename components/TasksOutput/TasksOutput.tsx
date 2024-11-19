@@ -1,12 +1,7 @@
 import { View } from "react-native";
-import TasksList from "./TasksList";
 
-interface ITask {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-}
+import TasksList from "./TasksList";
+import { ITask } from "../../@types/task";
 
 const DUMMY_TASKS: ITask[] = [
   {
@@ -32,7 +27,7 @@ const DUMMY_TASKS: ITask[] = [
 function TasksOutput() {
   return (
     <View>
-      <TasksList />
+      <TasksList tasks={DUMMY_TASKS} />
     </View>
   );
 }

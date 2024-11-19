@@ -1,7 +1,7 @@
-import { Text } from "react-native";
+import TasksOutput from "../components/TasksOutput/TasksOutput";
 
 function AllTasks() {
-  return <Text>AllTasks Screen</Text>;
+  return <TasksOutput />;
 }
 
 export default AllTasks;
