@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import AllTasks from "./screens/AllTasks";
 import ManageTask from "./screens/ManageTask";
 import { GlobalStyles } from "./constants/styles";
+import IconButton from "./components/UI/IconButton";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,14 @@ export default function App() {
           screenOptions={{
             headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
             headerTintColor: "white",
+            headerRight: ({ tintColor }) => (
+              <IconButton
+                name="add"
+                size={24}
+                color={tintColor}
+                onPress={() => {}}
+              />
+            ),
           }}
         >
           <Stack.Screen
