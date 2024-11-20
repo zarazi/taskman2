@@ -4,3 +4,5 @@ export interface ITask {
   description: string;
   status: string;
 }
+
+export interface ITaskData extends Omit<ITask, "id"> {}
