@@ -1,4 +1,4 @@
 export type StackParamList = {
   AllTasks: undefined;
-  ManageTask: undefined;
+  ManageTask: { taskId: string } | undefined;
 };

@@ -13,7 +13,7 @@ function TaskItem({ item }: TaskItemProps) {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
 
   function taskPressHandler() {
-    navigation.navigate("ManageTask");
+    navigation.navigate("ManageTask", { taskId: item.id });
   }
 
   return (
