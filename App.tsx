@@ -6,8 +6,9 @@ import AllTasks from "./screens/AllTasks";
 import ManageTask from "./screens/ManageTask";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/UI/IconButton";
+import { StackParamList } from "./@types/navigation";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export default function App() {
   return (
@@ -15,7 +16,7 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator
-          screenOptions={{
+          screenOptions={({ navigation }) => ({
             headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
             headerTintColor: "white",
             headerRight: ({ tintColor }) => (
@@ -23,10 +24,12 @@ export default function App() {
                 name="add"
                 size={24}
                 color={tintColor}
-                onPress={() => {}}
+                onPress={() => {
+                  navigation.navigate("ManageTask");
+                }}
               />
             ),
-          }}
+          })}
         >
           <Stack.Screen
             name="AllTasks"

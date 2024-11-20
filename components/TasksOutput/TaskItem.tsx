@@ -1,14 +1,21 @@
 import { Text, StyleSheet, Pressable, View } from "react-native";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import { GlobalStyles } from "../../constants/styles";
 import { ITask } from "../../@types/task";
+import { StackParamList } from "../../@types/navigation";
 
 interface TaskItemProps {
   item: ITask;
 }
 
 function TaskItem({ item }: TaskItemProps) {
-  function taskPressHandler() {}
+  const navigation = useNavigation<NavigationProp<StackParamList>>();
+
+  function taskPressHandler() {
+    navigation.navigate("ManageTask");
+  }
+
   return (
     <Pressable
       onPress={taskPressHandler}
