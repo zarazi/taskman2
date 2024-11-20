@@ -38,7 +38,13 @@ export default function App() {
               ),
             })}
           />
-          <Stack.Screen name="ManageTask" component={ManageTask} />
+          <Stack.Screen
+            name="ManageTask"
+            component={ManageTask}
+            options={{
+              presentation: "modal",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
