@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator<StackParamList>();
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <TasksContextProvider>
         <NavigationContainer>
           <Stack.Navigator
