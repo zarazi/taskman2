@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -6,10 +6,13 @@ import { StackParamList } from "../@types/navigation";
 import { GlobalStyles } from "../constants/styles";
 import IconButton from "../components/UI/IconButton";
 import Button from "../components/UI/Button";
+import { TasksContext } from "../store/tasks-context";
 
 type ManageTaskProps = NativeStackScreenProps<StackParamList, "ManageTask">;
 
 function ManageTask({ route, navigation }: ManageTaskProps) {
+  const tasksCtx = useContext(TasksContext);
+
   const editedTaskId = route.params?.taskId;
   const isEditing = !!editedTaskId;
 
@@ -20,6 +23,7 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
   }, [navigation, isEditing]);
 
   function deleteTaskHandler() {
+    if (isEditing) tasksCtx.deleteTask(editedTaskId);
     navigation.goBack();
   }
 
@@ -28,6 +32,19 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
   }
 
   function confirmHandler() {
+    if (isEditing) {
+      tasksCtx.updateTask(editedTaskId, {
+        title: "Updated Task",
+        description: "...",
+        status: "todo",
+      });
+    } else {
+      tasksCtx.addTask({
+        title: "New Task",
+        description: "...",
+        status: "todo",
+      });
+    }
     navigation.goBack();
   }
 
