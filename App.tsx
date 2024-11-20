@@ -19,24 +19,24 @@ export default function App() {
           screenOptions={({ navigation }) => ({
             headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
             headerTintColor: "white",
-            headerRight: ({ tintColor }) => (
-              <IconButton
-                name="add"
-                size={24}
-                color={tintColor}
-                onPress={() => {
-                  navigation.navigate("ManageTask");
-                }}
-              />
-            ),
           })}
         >
           <Stack.Screen
             name="AllTasks"
             component={AllTasks}
-            options={{
+            options={({ navigation }) => ({
               title: "All Tasks",
-            }}
+              headerRight: ({ tintColor }) => (
+                <IconButton
+                  name="add"
+                  size={24}
+                  color={tintColor}
+                  onPress={() => {
+                    navigation.navigate("ManageTask");
+                  }}
+                />
+              ),
+            })}
           />
           <Stack.Screen name="ManageTask" component={ManageTask} />
         </Stack.Navigator>
