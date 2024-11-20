@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { IconProps } from "@expo/vector-icons/build/createIconSet";
 
 interface IconButtonProps extends IconProps<string> {
+  name: keyof typeof Ionicons.glyphMap;
   onPress: () => void;
 }
 
@@ -13,7 +14,7 @@ function IconButton({ name, size, color, onPress }: IconButtonProps) {
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.buttonContainer}>
-        <Ionicons name={name as any} size={size} color={color} />
+        <Ionicons name={name} size={size} color={color} />
       </View>
     </Pressable>
   );
