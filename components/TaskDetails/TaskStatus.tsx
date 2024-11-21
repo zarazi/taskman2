@@ -2,11 +2,12 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { useState } from "react";
 
-type TaskDetailsProps = {
+type TaskStatusProps = {
   status: string;
+  onChange: (status: string) => void;
 };
 
-function TaskDetails({ status }: TaskDetailsProps) {
+function TaskStatus({ status }: TaskStatusProps) {
   const [statusValue, setStatusValue] = useState<string>(status);
 
   let statusBarStyle = {};
@@ -49,7 +50,7 @@ function TaskDetails({ status }: TaskDetailsProps) {
   );
 }
 
-export default TaskDetails;
+export default TaskStatus;
 
 const styles = StyleSheet.create({
   pressed: {
