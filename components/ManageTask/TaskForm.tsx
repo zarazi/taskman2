@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
-import Input from "./Input";
 import { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
 
 import { ITask, ITaskData } from "../../@types/task";
+import Input from "./Input";
 import Button from "../UI/Button";
 
 interface TaskFormProps {
@@ -37,6 +37,20 @@ function TaskForm(
       description: inputValues.description,
       status: inputValues.status,
     };
+
+    const titleIsValid = taskData.title.trim().length > 0;
+    // const descriptionIsValid = taskData.description.trim().length > 0;
+    const statusIsValid =
+      taskData.status.trim().length > 0 &&
+      ["todo", "in-progress", "done"].includes(taskData.status.trim());
+
+    if (!titleIsValid || !statusIsValid) {
+      Alert.alert(
+        "Invalid input",
+        "Please check and correct your input values"
+      );
+      return;
+    }
 
     onSubmit(taskData);
   }
@@ -73,6 +87,7 @@ function TaskForm(
           maxLength: 12,
           onChangeText: inputChangedHandler.bind(this, "status"),
           value: inputValues.status,
+          autoCapitalize: "none",
         }}
       />
       <View style={styles.buttons}>
