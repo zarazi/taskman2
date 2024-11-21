@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { StackParamList } from "../@types/navigation";
+import { ITaskData } from "../@types/task";
 import { TasksContext } from "../store/tasks-context";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
@@ -32,19 +33,11 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
     navigation.goBack();
   }
 
-  function confirmHandler() {
+  function confirmHandler(taskData: ITaskData) {
     if (isEditing) {
-      tasksCtx.updateTask(editedTaskId, {
-        title: "Updated Task",
-        description: "...",
-        status: "todo",
-      });
+      tasksCtx.updateTask(editedTaskId, taskData);
     } else {
-      tasksCtx.addTask({
-        title: "New Task",
-        description: "...",
-        status: "todo",
-      });
+      tasksCtx.addTask(taskData);
     }
     navigation.goBack();
   }
@@ -54,6 +47,7 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
       <TaskForm
         submitButtonLabel={isEditing ? "Update" : "Add"}
         onCancel={cancelHandler}
+        onSubmit={confirmHandler}
       />
       {isEditing && (
         <View style={styles.deleteContainer}>

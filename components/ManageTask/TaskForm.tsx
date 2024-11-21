@@ -7,7 +7,7 @@ import Button from "../UI/Button";
 interface TaskFormProps {
   submitButtonLabel: string;
   onCancel: () => void;
-  onSubmit?: () => void;
+  onSubmit: (taskData: ITaskData) => void;
 }
 
 function TaskForm(
@@ -29,7 +29,15 @@ function TaskForm(
     });
   }
 
-  function submitHandler() {}
+  function submitHandler() {
+    const taskData: ITaskData = {
+      title: inputValues.title,
+      description: inputValues.description,
+      status: inputValues.status,
+    };
+
+    onSubmit(taskData);
+  }
 
   // useEffect(() => {
   //   console.log(inputValues);
