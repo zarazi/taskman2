@@ -89,6 +89,7 @@ function TaskForm(
       <Text style={styles.title}>Your Task</Text>
       <Input
         label="Title"
+        invalid={!inputs.title.isValid}
         textInputConfig={{
           maxLength: 100,
           onChangeText: inputChangedHandler.bind(this, "title"),
@@ -97,6 +98,7 @@ function TaskForm(
       />
       <Input
         label="Description"
+        invalid={!inputs.description.isValid}
         textInputConfig={{
           multiline: true,
           maxLength: 255,
@@ -108,6 +110,7 @@ function TaskForm(
       />
       <Input
         label="Status"
+        invalid={!inputs.status.isValid}
         textInputConfig={{
           maxLength: 12,
           onChangeText: inputChangedHandler.bind(this, "status"),
