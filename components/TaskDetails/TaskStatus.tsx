@@ -1,14 +1,17 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
+import { useState } from "react";
 
 type TaskDetailsProps = {
   status: string;
 };
 
 function TaskDetails({ status }: TaskDetailsProps) {
+  const [statusValue, setStatusValue] = useState<string>(status);
+
   let statusBarStyle = {};
 
-  switch (status) {
+  switch (statusValue) {
     case "todo":
       statusBarStyle = styles.status25;
       break;
@@ -20,7 +23,19 @@ function TaskDetails({ status }: TaskDetailsProps) {
       break;
   }
 
-  function statusPressHandler() {}
+  function statusPressHandler() {
+    setStatusValue((currentStatusValue) => {
+      switch (currentStatusValue) {
+        case "todo":
+          return "in-progress";
+        case "in-progress":
+          return "done";
+        case "done":
+        default:
+          return "todo";
+      }
+    });
+  }
 
   return (
     <Pressable
@@ -28,7 +43,7 @@ function TaskDetails({ status }: TaskDetailsProps) {
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.statusContainer}>
-        <Text style={[styles.status, statusBarStyle]}>{status}</Text>
+        <Text style={[styles.status, statusBarStyle]}>{statusValue}</Text>
       </View>
     </Pressable>
   );
