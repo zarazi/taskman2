@@ -40,6 +40,7 @@ type TaskActionType =
 function tasksReducer(state: ITask[], action: TaskActionType) {
   switch (action.type) {
     case "ADD":
+      // TODO: generate more compact format with UUID or shorter date format
       const id = new Date().toString() + Math.random().toString();
       return [{ ...action.payload, id: id }, ...state];
     case "DELETE":
