@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import { Text, StyleSheet, Pressable, View } from "react-native";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 
-import { GlobalStyles } from "../../constants/styles";
 import { ITask } from "../../@types/task";
 import { StackParamList } from "../../@types/navigation";
+import { TasksContext } from "../../store/tasks-context";
+import { GlobalStyles } from "../../constants/styles";
 import IconButton from "../UI/IconButton";
 import TaskStatus from "../TaskDetails/TaskStatus";
 
@@ -12,10 +14,16 @@ interface TaskItemProps {
 }
 
 function TaskItem({ item }: TaskItemProps) {
+  const tasksCtx = useContext(TasksContext);
   const navigation = useNavigation<NavigationProp<StackParamList>>();
 
   function taskPressHandler() {
     navigation.navigate("ManageTask", { taskId: item.id });
+  }
+
+  function taskDeleteHandler() {
+    // TODO: confirm before delete
+    tasksCtx.deleteTask(item.id);
   }
 
   return (
@@ -36,7 +44,7 @@ function TaskItem({ item }: TaskItemProps) {
               name="trash"
               color={GlobalStyles.colors.error500}
               size={32}
-              onPress={() => {}}
+              onPress={taskDeleteHandler}
             />
           </View>
         </View>
