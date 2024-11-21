@@ -6,7 +6,6 @@ import { StackParamList } from "../@types/navigation";
 import { ITaskData } from "../@types/task";
 import { TasksContext } from "../store/tasks-context";
 import { GlobalStyles } from "../constants/styles";
-import Button from "../components/UI/Button";
 import IconButton from "../components/UI/IconButton";
 import TaskForm from "../components/ManageTask/TaskForm";
 
@@ -17,6 +16,8 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
 
   const editedTaskId = route.params?.taskId;
   const isEditing = !!editedTaskId;
+
+  const selectedTask = tasksCtx.tasks.find((task) => task.id === editedTaskId);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -48,6 +49,7 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
         submitButtonLabel={isEditing ? "Update" : "Add"}
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
+        defaultValues={selectedTask}
       />
       {isEditing && (
         <View style={styles.deleteContainer}>

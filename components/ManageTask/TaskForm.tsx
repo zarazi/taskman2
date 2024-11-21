@@ -1,23 +1,25 @@
 import { View, Text, StyleSheet } from "react-native";
 import Input from "./Input";
 import { useEffect, useState } from "react";
-import { ITaskData } from "../../@types/task";
+
+import { ITask, ITaskData } from "../../@types/task";
 import Button from "../UI/Button";
 
 interface TaskFormProps {
   submitButtonLabel: string;
   onCancel: () => void;
   onSubmit: (taskData: ITaskData) => void;
+  defaultValues?: ITask;
 }
 
 function TaskForm(
   this: any,
-  { submitButtonLabel, onCancel, onSubmit }: TaskFormProps
+  { submitButtonLabel, onCancel, onSubmit, defaultValues }: TaskFormProps
 ) {
   const [inputValues, setInputValues] = useState<ITaskData>({
-    title: "",
-    description: "",
-    status: "",
+    title: defaultValues ? defaultValues.title : "",
+    description: defaultValues ? defaultValues.description : "",
+    status: defaultValues ? defaultValues.status : "",
   });
 
   function inputChangedHandler(inputIdentifier: string, enteredValue: string) {
