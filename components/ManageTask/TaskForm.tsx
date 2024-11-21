@@ -2,8 +2,18 @@ import { View, Text, StyleSheet } from "react-native";
 import Input from "./Input";
 import { useEffect, useState } from "react";
 import { ITaskData } from "../../@types/task";
+import Button from "../UI/Button";
 
-function TaskForm(this: any) {
+interface TaskFormProps {
+  submitButtonLabel: string;
+  onCancel: () => void;
+  onSubmit?: () => void;
+}
+
+function TaskForm(
+  this: any,
+  { submitButtonLabel, onCancel, onSubmit }: TaskFormProps
+) {
   const [inputValues, setInputValues] = useState<ITaskData>({
     title: "",
     description: "",
@@ -18,6 +28,8 @@ function TaskForm(this: any) {
       };
     });
   }
+
+  function submitHandler() {}
 
   // useEffect(() => {
   //   console.log(inputValues);
@@ -53,6 +65,14 @@ function TaskForm(this: any) {
           value: inputValues.status,
         }}
       />
+      <View style={styles.buttons}>
+        <Button style={styles.button} mode="flat" onPress={onCancel}>
+          Cancel
+        </Button>
+        <Button style={styles.button} onPress={submitHandler}>
+          {submitButtonLabel}
+        </Button>
+      </View>
     </View>
   );
 }
@@ -70,5 +90,14 @@ const styles = StyleSheet.create({
     color: "white",
     // marginVertical: 24,
     textAlign: "center",
+  },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 8,
   },
 });
