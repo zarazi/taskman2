@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 import { ITask, ITaskData } from "../../@types/task";
+import { GlobalStyles } from "../../constants/styles";
 import Input from "./Input";
 import Button from "../UI/Button";
 
@@ -16,48 +17,72 @@ function TaskForm(
   this: any,
   { submitButtonLabel, onCancel, onSubmit, defaultValues }: TaskFormProps
 ) {
-  const [inputValues, setInputValues] = useState<ITaskData>({
-    title: defaultValues ? defaultValues.title : "",
-    description: defaultValues ? defaultValues.description : "",
-    status: defaultValues ? defaultValues.status : "",
+  type ValidKey = "title" | "description" | "status";
+  type ValidData<T> = {
+    [key in ValidKey]: {
+      value: T;
+      isValid: boolean;
+    };
+  };
+
+  const [inputs, setInputs] = useState<ValidData<string>>({
+    title: {
+      value: defaultValues ? defaultValues.title : "",
+      isValid: true,
+    },
+    description: {
+      value: defaultValues ? defaultValues.description : "",
+      isValid: true,
+    },
+    status: {
+      value: defaultValues ? defaultValues.status : "",
+      isValid: true,
+    },
   });
 
   function inputChangedHandler(inputIdentifier: string, enteredValue: string) {
-    setInputValues((currentInputValues) => {
+    setInputs((currentInputs) => {
       return {
-        ...currentInputValues,
-        [inputIdentifier]: enteredValue,
+        ...currentInputs,
+        [inputIdentifier]: { value: enteredValue, isValid: true },
       };
     });
   }
 
   function submitHandler() {
     const taskData: ITaskData = {
-      title: inputValues.title,
-      description: inputValues.description,
-      status: inputValues.status,
+      title: inputs.title.value,
+      description: inputs.description.value,
+      status: inputs.status.value,
     };
 
     const titleIsValid = taskData.title.trim().length > 0;
-    // const descriptionIsValid = taskData.description.trim().length > 0;
+    const descriptionIsValid = taskData.description.trim().length >= 0;
     const statusIsValid =
       taskData.status.trim().length > 0 &&
       ["todo", "in-progress", "done"].includes(taskData.status.trim());
 
-    if (!titleIsValid || !statusIsValid) {
-      Alert.alert(
-        "Invalid input",
-        "Please check and correct your input values"
-      );
+    if (!titleIsValid || !descriptionIsValid || !statusIsValid) {
+      setInputs((currentInputs) => {
+        return {
+          title: { value: currentInputs.title.value, isValid: titleIsValid },
+          description: {
+            value: currentInputs.description.value,
+            isValid: descriptionIsValid,
+          },
+          status: { value: currentInputs.status.value, isValid: statusIsValid },
+        };
+      });
       return;
     }
 
     onSubmit(taskData);
   }
 
-  // useEffect(() => {
-  //   console.log(inputValues);
-  // }, [inputValues]);
+  const formIsInvalid =
+    !inputs.title.isValid ||
+    !inputs.description.isValid ||
+    !inputs.status.isValid;
 
   return (
     <View style={styles.form}>
@@ -67,7 +92,7 @@ function TaskForm(
         textInputConfig={{
           maxLength: 100,
           onChangeText: inputChangedHandler.bind(this, "title"),
-          value: inputValues.title,
+          value: inputs.title.value,
         }}
       />
       <Input
@@ -76,7 +101,7 @@ function TaskForm(
           multiline: true,
           maxLength: 255,
           onChangeText: inputChangedHandler.bind(this, "description"),
-          value: inputValues.description,
+          value: inputs.description.value,
           // autoCapitalize: 'none',
           // autoCorrect: true,
         }}
@@ -86,10 +111,15 @@ function TaskForm(
         textInputConfig={{
           maxLength: 12,
           onChangeText: inputChangedHandler.bind(this, "status"),
-          value: inputValues.status,
+          value: inputs.status.value,
           autoCapitalize: "none",
         }}
       />
+      {formIsInvalid && (
+        <Text style={styles.errorText}>
+          Invalid input values - please check your entered!
+        </Text>
+      )}
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={onCancel}>
           Cancel
@@ -115,6 +145,11 @@ const styles = StyleSheet.create({
     color: "white",
     // marginVertical: 24,
     textAlign: "center",
+  },
+  errorText: {
+    textAlign: "center",
+    color: GlobalStyles.colors.error500,
+    margin: 8,
   },
   buttons: {
     flexDirection: "row",
