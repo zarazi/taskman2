@@ -1,48 +1,49 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
-import { GlobalStyles } from "../../constants/styles";
 import { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Pressable, ViewStyle } from "react-native";
+
+import { GlobalStyles } from "../../constants/styles";
 
 type TaskStatusProps = {
   status: string;
   onChange?: (status: string) => void;
 };
 
-function TaskStatus(this: any, { status, onChange }: TaskStatusProps) {
-  const [statusValue, setStatusValue] = useState<string>(status);
+function TaskStatus({ status, onChange }: TaskStatusProps) {
+  const [statusBarStyle, setStatusBarStyle] = useState<ViewStyle>(
+    styles.status
+  );
 
-  let statusBarStyle = {};
-
-  switch (statusValue) {
-    case "todo":
-      statusBarStyle = styles.status25;
-      break;
-    case "in-progress":
-      statusBarStyle = styles.status50;
-      break;
-    case "done":
-      statusBarStyle = styles.status100;
-      break;
+  function getStatusBarStyle(status: string) {
+    switch (status) {
+      default:
+      case "todo":
+        return styles.status25;
+      case "in-progress":
+        return styles.status50;
+      case "done":
+        return styles.status100;
+    }
   }
+  useEffect(() => {
+    setStatusBarStyle(getStatusBarStyle(status));
+  }, [status]);
 
+  function getNextStatus(status: string) {
+    switch (status) {
+      case "todo":
+        return "in-progress";
+      case "in-progress":
+        return "done";
+      case "done":
+      default:
+        return "todo";
+    }
+  }
   function statusPressHandler() {
     if (!onChange) return;
 
-    setStatusValue((currentStatusValue) => {
-      switch (currentStatusValue) {
-        case "todo":
-          return "in-progress";
-        case "in-progress":
-          return "done";
-        case "done":
-        default:
-          return "todo";
-      }
-    });
+    onChange(getNextStatus(status));
   }
-
-  useEffect(() => {
-    if (onChange) onChange.call(this, statusValue);
-  }, [statusValue]);
 
   return (
     <Pressable
@@ -50,7 +51,7 @@ function TaskStatus(this: any, { status, onChange }: TaskStatusProps) {
       style={({ pressed }) => onChange && pressed && styles.pressed}
     >
       <View style={styles.statusContainer}>
-        <Text style={[styles.status, statusBarStyle]}>{statusValue}</Text>
+        <Text style={[styles.status, statusBarStyle]}>{status}</Text>
       </View>
     </Pressable>
   );
