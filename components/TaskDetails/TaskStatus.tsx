@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type TaskStatusProps = {
   status: string;
-  onChange: (status: string) => void;
+  onChange?: (status: string) => void;
 };
 
-function TaskStatus({ status }: TaskStatusProps) {
+function TaskStatus(this: any, { status, onChange }: TaskStatusProps) {
   const [statusValue, setStatusValue] = useState<string>(status);
 
   let statusBarStyle = {};
@@ -25,6 +25,8 @@ function TaskStatus({ status }: TaskStatusProps) {
   }
 
   function statusPressHandler() {
+    if (!onChange) return;
+
     setStatusValue((currentStatusValue) => {
       switch (currentStatusValue) {
         case "todo":
@@ -38,10 +40,14 @@ function TaskStatus({ status }: TaskStatusProps) {
     });
   }
 
+  useEffect(() => {
+    if (onChange) onChange.call(this, statusValue);
+  }, [statusValue]);
+
   return (
     <Pressable
       onPress={statusPressHandler}
-      style={({ pressed }) => pressed && styles.pressed}
+      style={({ pressed }) => onChange && pressed && styles.pressed}
     >
       <View style={styles.statusContainer}>
         <Text style={[styles.status, statusBarStyle]}>{statusValue}</Text>

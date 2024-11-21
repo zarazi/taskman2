@@ -40,7 +40,7 @@ function TaskItem({ item }: TaskItemProps) {
             />
           </View>
         </View>
-        <TaskStatus status={item.status} onChange={() => {}} />
+        <TaskStatus status={item.status} />
       </View>
     </Pressable>
   );

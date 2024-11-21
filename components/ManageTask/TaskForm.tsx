@@ -5,6 +5,7 @@ import { ITask, ITaskData } from "../../@types/task";
 import { GlobalStyles } from "../../constants/styles";
 import Input from "./Input";
 import Button from "../UI/Button";
+import TaskStatus from "../TaskDetails/TaskStatus";
 
 interface TaskFormProps {
   submitButtonLabel: string;
@@ -35,7 +36,7 @@ function TaskForm(
       isValid: true,
     },
     status: {
-      value: defaultValues ? defaultValues.status : "",
+      value: defaultValues ? defaultValues.status : "todo",
       isValid: true,
     },
   });
@@ -108,7 +109,7 @@ function TaskForm(
           // autoCorrect: true,
         }}
       />
-      <Input
+      {/* <Input
         label="Status"
         invalid={!inputs.status.isValid}
         textInputConfig={{
@@ -117,6 +118,10 @@ function TaskForm(
           value: inputs.status.value,
           autoCapitalize: "none",
         }}
+      /> */}
+      <TaskStatus
+        status={inputs.status.value}
+        onChange={inputChangedHandler.bind(this, "status")}
       />
       {formIsInvalid && (
         <Text style={styles.errorText}>
