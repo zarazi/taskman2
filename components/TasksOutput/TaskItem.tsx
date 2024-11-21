@@ -15,7 +15,7 @@ function TaskItem({ item }: TaskItemProps) {
   const navigation = useNavigation<NavigationProp<StackParamList>>();
 
   function taskPressHandler() {
-    navigation.navigate("TaskDetails", { taskId: item.id });
+    navigation.navigate("ManageTask", { taskId: item.id });
   }
 
   return (
