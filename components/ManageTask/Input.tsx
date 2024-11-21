@@ -11,10 +11,11 @@ import { GlobalStyles } from "../../constants/styles";
 
 interface InputProps {
   label: string;
+  style?: StyleProp<ViewStyle>;
   textInputConfig: TextInputProps;
 }
 
-function Input({ label, textInputConfig }: InputProps) {
+function Input({ label, style, textInputConfig }: InputProps) {
   const inputStyles: StyleProp<ViewStyle> = [styles.input];
 
   if (textInputConfig && textInputConfig.multiline) {
@@ -22,7 +23,7 @@ function Input({ label, textInputConfig }: InputProps) {
   }
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, style]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput style={inputStyles} {...textInputConfig} />
     </View>

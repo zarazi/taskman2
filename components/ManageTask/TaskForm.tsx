@@ -1,9 +1,10 @@
-import { View } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Input from "./Input";
 
 function TaskForm() {
   return (
-    <View>
+    <View style={styles.form}>
+      <Text style={styles.title}>Your Task</Text>
       <Input
         label="Title"
         textInputConfig={{
@@ -33,3 +34,17 @@ function TaskForm() {
 }
 
 export default TaskForm;
+
+const styles = StyleSheet.create({
+  form: {
+    marginTop: 64,
+    marginBottom: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "white",
+    marginVertical: 24,
+    textAlign: "center",
+  },
+});
