@@ -52,17 +52,6 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
         onSubmit={confirmHandler}
         defaultValues={selectedTask}
       />
-      {/* TODO: fix orphan delete by moving delete button to task list item instead */}
-      {isEditing && (
-        <View style={styles.deleteContainer}>
-          <IconButton
-            name="trash"
-            color={GlobalStyles.colors.error500}
-            size={36}
-            onPress={deleteTaskHandler}
-          />
-        </View>
-      )}
     </View>
   );
 }
