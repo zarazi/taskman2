@@ -46,6 +46,7 @@ export default function App() {
               component={TaskDetails}
               options={{
                 title: "Task Details",
+                presentation: "modal",
               }}
             />
             <Stack.Screen
