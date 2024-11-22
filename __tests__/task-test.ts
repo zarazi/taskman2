@@ -1,4 +1,4 @@
-import { generateId } from "../task";
+import { generateId } from "../utils/task";
 
 describe("Generate Random ID", () => {
   test("get random id in alphanumeric characters", () => {

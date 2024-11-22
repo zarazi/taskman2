@@ -1,4 +1,4 @@
-import Button from "../Button";
+import Button from "../components/UI/Button";
 import { render, screen } from "@testing-library/react-native";
 
 describe("<Button />", () => {
