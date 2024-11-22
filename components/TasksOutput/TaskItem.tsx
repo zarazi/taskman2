@@ -26,6 +26,14 @@ function TaskItem({ item }: TaskItemProps) {
     tasksCtx.deleteTask(item.id);
   }
 
+  function statusChangeHandler(status: string) {
+    const selectedTask = tasksCtx.tasks.find((task) => task.id === item.id);
+    if (!selectedTask) return;
+
+    selectedTask.status = status;
+    tasksCtx.updateTask(selectedTask.id, selectedTask);
+  }
+
   return (
     <Pressable
       onPress={taskPressHandler}
@@ -48,7 +56,7 @@ function TaskItem({ item }: TaskItemProps) {
             />
           </View>
         </View>
-        <TaskStatus status={item.status} />
+        <TaskStatus status={item.status} onChange={statusChangeHandler} />
       </View>
     </Pressable>
   );
