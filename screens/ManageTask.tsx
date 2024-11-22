@@ -26,11 +26,6 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
     });
   }, [navigation, isEditing]);
 
-  function deleteTaskHandler() {
-    if (isEditing) tasksCtx.deleteTask(editedTaskId);
-    navigation.goBack();
-  }
-
   function cancelHandler() {
     navigation.goBack();
   }
