@@ -77,11 +77,20 @@ Because there is a v1 with very little features using JavaScript. So this has to
 - Time tracking on each task
 - Task assignment via email
 
-## More on writing React Native app
+## Want to contribute
+
+- Propose your cool features by PR
+- Optionally add more unit tests and make them passed by running
+
+  ```bash
+  npm run test
+  ```
+
+## More on React Native development
 
 To learn more about developing your project with React Native, look at the following resources:
 
-- [React Native documentation](https://reactnative.dev/docs/getting-started): React Native brings the best parts of developing with React to native development. It's a best-in-class JavaScript library for building user interfaces.
+- [React Native documentation](https://reactnative.dev/docs/getting-started): Brings the best parts of developing with React to native development. It's a best-in-class JavaScript library for building user interfaces.
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
