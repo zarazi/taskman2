@@ -18,6 +18,7 @@ function TaskDetailsView({ displayValues }: TaskDetailsViewProps) {
         labelStyle={styles.labelReadonly}
         invalid={false}
         textInputConfig={{
+          multiline: true,
           maxLength: 100,
           value: displayValues.title,
           readOnly: true,
