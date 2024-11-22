@@ -27,6 +27,14 @@ Another Task Management app created with [Expo](https://expo.dev) via [`create-e
 - React Navigator as a screen router
 - React Context as a state management lib
 
+## Pre-requisites
+
+- Node.js v20+
+- If you need to make a local development build on devices, you need:
+  - For Android, needs Android studio
+  - For Apple devices, needs Xcode
+- Some code editors like VScode or IntelliJ Idea
+
 ## Get started
 
 1. Once cloning the code successfuly, install all dependencies
