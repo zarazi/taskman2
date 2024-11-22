@@ -5,6 +5,7 @@ import { ITask, ITaskData } from "../../@types/task";
 import { GlobalStyles } from "../../constants/styles";
 import Input from "./Input";
 import Button from "../UI/Button";
+import TaskStatus from "../TaskDetails/TaskStatus";
 
 interface TaskFormProps {
   submitButtonLabel: string;
@@ -35,7 +36,7 @@ function TaskForm(
       isValid: true,
     },
     status: {
-      value: defaultValues ? defaultValues.status : "",
+      value: defaultValues ? defaultValues.status : "todo",
       isValid: true,
     },
   });
@@ -108,16 +109,13 @@ function TaskForm(
           // autoCorrect: true,
         }}
       />
-      <Input
-        label="Status"
-        invalid={!inputs.status.isValid}
-        textInputConfig={{
-          maxLength: 12,
-          onChangeText: inputChangedHandler.bind(this, "status"),
-          value: inputs.status.value,
-          autoCapitalize: "none",
-        }}
-      />
+      <View style={styles.statusContainer}>
+        <Text style={styles.label}>Status</Text>
+        <TaskStatus
+          status={inputs.status.value}
+          onChange={inputChangedHandler.bind(this, "status")}
+        />
+      </View>
       {formIsInvalid && (
         <Text style={styles.errorText}>
           Invalid input values - please check your entered!
@@ -148,6 +146,16 @@ const styles = StyleSheet.create({
     color: "white",
     // marginVertical: 24,
     textAlign: "center",
+  },
+  statusContainer: {
+    marginHorizontal: 4,
+    marginVertical: 8,
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 12,
+    color: GlobalStyles.colors.primary100,
+    marginBottom: 4,
   },
   errorText: {
     textAlign: "center",

@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 
 import AllTasks from "./screens/AllTasks";
+import TaskDetails from "./screens/TaskDetails";
 import ManageTask from "./screens/ManageTask";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/UI/IconButton";
@@ -39,6 +40,11 @@ export default function App() {
                   />
                 ),
               })}
+            />
+            <Stack.Screen
+              name="TaskDetails"
+              component={TaskDetails}
+              options={{}}
             />
             <Stack.Screen
               name="ManageTask"
