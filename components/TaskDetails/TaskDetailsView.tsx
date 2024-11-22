@@ -12,25 +12,29 @@ interface TaskDetailsViewProps {
 function TaskDetailsView({ displayValues }: TaskDetailsViewProps) {
   return (
     <View style={styles.form}>
-      <Text style={styles.title}>Your Task</Text>
+      {/* <Text style={styles.title}>{displayValues.title}</Text> */}
       <Input
         label="Title"
+        labelStyle={styles.labelReadonly}
         invalid={false}
         textInputConfig={{
           maxLength: 100,
           value: displayValues.title,
+          readOnly: true,
         }}
+        textInputStyle={styles.textInputReadonly}
       />
       <Input
         label="Description"
+        labelStyle={styles.labelReadonly}
         invalid={false}
         textInputConfig={{
           multiline: true,
           maxLength: 255,
           value: displayValues.description,
-          // autoCapitalize: 'none',
-          // autoCorrect: true,
+          readOnly: true,
         }}
+        textInputStyle={styles.textInputReadonly}
       />
       <View style={styles.statusContainer}>
         <Text style={styles.label}>Status</Text>
@@ -54,6 +58,18 @@ const styles = StyleSheet.create({
     // marginVertical: 24,
     textAlign: "center",
   },
+  labelReadonly: {
+    color: GlobalStyles.colors.primary200,
+  },
+  textInputReadonly: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderRadius: 0,
+    borderColor: "transparent",
+    borderTopColor: GlobalStyles.colors.primary200,
+    color: "white",
+    paddingLeft: 0,
+  },
   statusContainer: {
     marginHorizontal: 4,
     marginVertical: 8,
@@ -61,21 +77,12 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    color: GlobalStyles.colors.primary100,
-    marginBottom: 4,
-  },
-  errorText: {
-    textAlign: "center",
-    color: GlobalStyles.colors.error500,
-    margin: 8,
-  },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8,
+    color: GlobalStyles.colors.primary200,
+    paddingBottom: 4,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderRadius: 0,
+    borderColor: "transparent",
+    borderBottomColor: GlobalStyles.colors.primary200,
   },
 });

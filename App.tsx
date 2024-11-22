@@ -44,7 +44,9 @@ export default function App() {
             <Stack.Screen
               name="TaskDetails"
               component={TaskDetails}
-              options={{}}
+              options={{
+                title: "Task Details",
+              }}
             />
             <Stack.Screen
               name="ManageTask"
