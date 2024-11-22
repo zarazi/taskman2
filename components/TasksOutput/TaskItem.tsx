@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Text, StyleSheet, Pressable, View } from "react-native";
+import { Text, StyleSheet, Pressable, View, Alert } from "react-native";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import { ITask } from "../../@types/task";
@@ -15,6 +15,8 @@ interface TaskItemProps {
 
 function TaskItem({ item }: TaskItemProps) {
   const tasksCtx = useContext(TasksContext);
+  const selectedTask = tasksCtx.tasks.find((task) => task.id === item.id);
+
   const navigation = useNavigation<NavigationProp<StackParamList>>();
 
   function taskPressHandler() {
@@ -22,12 +24,23 @@ function TaskItem({ item }: TaskItemProps) {
   }
 
   function taskDeleteHandler() {
-    // TODO: confirm before delete
-    tasksCtx.deleteTask(item.id);
+    if (!selectedTask) return;
+
+    Alert.alert(
+      "Delete Confirmation",
+      `Do you want to delete task "${selectedTask.title}" ?`,
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+          onPress: () => {},
+        },
+        { text: "Ok", onPress: () => tasksCtx.deleteTask(item.id) },
+      ]
+    );
   }
 
   function statusChangeHandler(status: string) {
-    const selectedTask = tasksCtx.tasks.find((task) => task.id === item.id);
     if (!selectedTask) return;
 
     selectedTask.status = status;
