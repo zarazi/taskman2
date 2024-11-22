@@ -56,7 +56,11 @@ function TaskItem({ item }: TaskItemProps) {
         <View style={styles.upperContainer}>
           <View style={styles.textContainer}>
             <Text style={[styles.textBase, styles.title]}>{item.title}</Text>
-            <Text style={[styles.textBase, styles.description]}>
+            <Text
+              style={[styles.textBase, styles.description]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {item.description}
             </Text>
           </View>
