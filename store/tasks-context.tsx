@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useReducer } from "react";
 
 import { ITask, ITaskData } from "../@types/task";
+import { generateId } from "../utils/task";
 
 const DUMMY_TASKS: ITask[] = [
   {
@@ -40,8 +41,7 @@ type TaskActionType =
 function tasksReducer(state: ITask[], action: TaskActionType) {
   switch (action.type) {
     case "ADD":
-      // TODO: generate more compact format with UUID or shorter date format
-      const id = new Date().toString() + Math.random().toString();
+      const id = generateId();
       return [{ ...action.payload, id: id }, ...state];
     case "DELETE":
       return state.filter((task) => task.id !== action.payload);
