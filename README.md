@@ -53,7 +53,7 @@ Another Task Management app created with [Expo](https://expo.dev) via [`create-e
 
 4. After you installed Expo Go app on your device, use your phone camera to shoot the QR code and follow the link to open the app.
 
-   - On Android device, you could open Expo Go app and scan QR code from the main menu manually.
+   - On most Android devices, you might need to open Expo Go app and scan QR code from the main menu manually.
 
 5. Enjoy the app!
 
