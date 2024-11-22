@@ -60,15 +60,16 @@ const styles = StyleSheet.create({
   },
   labelReadonly: {
     color: GlobalStyles.colors.primary200,
+    marginBottom: 0,
   },
   textInputReadonly: {
     backgroundColor: "transparent",
     borderWidth: 1,
     borderRadius: 0,
     borderColor: "transparent",
-    borderTopColor: GlobalStyles.colors.primary200,
     color: "white",
     paddingLeft: 0,
+    paddingTop: 0,
   },
   statusContainer: {
     marginHorizontal: 4,
@@ -78,11 +79,10 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 12,
     color: GlobalStyles.colors.primary200,
-    paddingBottom: 4,
-    marginBottom: 12,
+    paddingBottom: 0,
+    marginBottom: 6,
     borderWidth: 1,
     borderRadius: 0,
     borderColor: "transparent",
-    borderBottomColor: GlobalStyles.colors.primary200,
   },
 });
