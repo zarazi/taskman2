@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, ViewStyle } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ViewStyle,
+  Platform,
+} from "react-native";
 
 import { GlobalStyles } from "../../constants/styles";
 
-type TaskStatusProps = {
+interface TaskStatusProps {
   status: string;
   onChange?: (status: string) => void;
-};
+}
 
 function TaskStatus({ status, onChange }: TaskStatusProps) {
   const [statusBarStyle, setStatusBarStyle] = useState<ViewStyle>(
@@ -71,6 +78,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   status: {
+    padding: Platform.OS === "ios" ? 6 : null,
     fontWeight: "bold",
     textAlign: "center",
     textAlignVertical: "center",

@@ -6,17 +6,27 @@ import {
   StyleSheet,
   StyleProp,
   ViewStyle,
+  TextStyle,
 } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 
 interface InputProps {
   label: string;
+  labelStyle?: StyleProp<TextStyle>;
   invalid: boolean;
   style?: StyleProp<ViewStyle>;
   textInputConfig: TextInputProps;
+  textInputStyle?: StyleProp<ViewStyle>;
 }
 
-function Input({ label, invalid, style, textInputConfig }: InputProps) {
+function Input({
+  label,
+  labelStyle,
+  invalid,
+  style,
+  textInputConfig,
+  textInputStyle,
+}: InputProps) {
   const inputStyles: StyleProp<ViewStyle> = [styles.input];
 
   if (textInputConfig && textInputConfig.multiline) {
@@ -29,10 +39,10 @@ function Input({ label, invalid, style, textInputConfig }: InputProps) {
 
   return (
     <View style={[styles.inputContainer, style]}>
-      <Text style={[styles.label, invalid && styles.invalidLabel]}>
+      <Text style={[styles.label, invalid && styles.invalidLabel, labelStyle]}>
         {label}
       </Text>
-      <TextInput style={inputStyles} {...textInputConfig} />
+      <TextInput style={[inputStyles, textInputStyle]} {...textInputConfig} />
     </View>
   );
 }

@@ -9,7 +9,8 @@ import { GlobalStyles } from "../constants/styles";
 import IconButton from "../components/UI/IconButton";
 import TaskForm from "../components/ManageTask/TaskForm";
 
-type ManageTaskProps = NativeStackScreenProps<StackParamList, "ManageTask">;
+interface ManageTaskProps
+  extends NativeStackScreenProps<StackParamList, "ManageTask"> {}
 
 function ManageTask({ route, navigation }: ManageTaskProps) {
   const tasksCtx = useContext(TasksContext);
@@ -24,11 +25,6 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
       title: isEditing ? "Edit Task" : "Add Task",
     });
   }, [navigation, isEditing]);
-
-  function deleteTaskHandler() {
-    if (isEditing) tasksCtx.deleteTask(editedTaskId);
-    navigation.goBack();
-  }
 
   function cancelHandler() {
     navigation.goBack();
@@ -51,17 +47,6 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
         onSubmit={confirmHandler}
         defaultValues={selectedTask}
       />
-      {/* TODO: fix orphan delete by moving delete button to task list item instead */}
-      {isEditing && (
-        <View style={styles.deleteContainer}>
-          <IconButton
-            name="trash"
-            color={GlobalStyles.colors.error500}
-            size={36}
-            onPress={deleteTaskHandler}
-          />
-        </View>
-      )}
     </View>
   );
 }
