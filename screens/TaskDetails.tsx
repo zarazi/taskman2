@@ -6,7 +6,8 @@ import { StackParamList } from "../@types/navigation";
 import { TasksContext } from "../store/tasks-context";
 import Button from "../components/UI/Button";
 
-type TaskDetailsProps = NativeStackScreenProps<StackParamList, "TaskDetails">;
+interface TaskDetailsProps
+  extends NativeStackScreenProps<StackParamList, "TaskDetails"> {}
 
 function TaskDetails({ route, navigation }: TaskDetailsProps) {
   const tasksCtx = useContext(TasksContext);

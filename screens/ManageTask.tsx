@@ -9,7 +9,8 @@ import { GlobalStyles } from "../constants/styles";
 import IconButton from "../components/UI/IconButton";
 import TaskForm from "../components/ManageTask/TaskForm";
 
-type ManageTaskProps = NativeStackScreenProps<StackParamList, "ManageTask">;
+interface ManageTaskProps
+  extends NativeStackScreenProps<StackParamList, "ManageTask"> {}
 
 function ManageTask({ route, navigation }: ManageTaskProps) {
   const tasksCtx = useContext(TasksContext);

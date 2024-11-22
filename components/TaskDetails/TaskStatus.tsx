@@ -10,10 +10,10 @@ import {
 
 import { GlobalStyles } from "../../constants/styles";
 
-type TaskStatusProps = {
+interface TaskStatusProps {
   status: string;
   onChange?: (status: string) => void;
-};
+}
 
 function TaskStatus({ status, onChange }: TaskStatusProps) {
   const [statusBarStyle, setStatusBarStyle] = useState<ViewStyle>(
