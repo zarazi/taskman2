@@ -4,6 +4,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { StackParamList } from "../@types/navigation";
 import { TasksContext } from "../store/tasks-context";
+import { GlobalStyles } from "../constants/styles";
+import TaskDetailsView from "../components/TaskDetails/TaskDetailsView";
 import Button from "../components/UI/Button";
 
 interface TaskDetailsProps
@@ -28,8 +30,7 @@ function TaskDetails({ route, navigation }: TaskDetailsProps) {
 
   return (
     <View style={styles.container}>
-      <Text>Details of {selectedTaskId}</Text>
-      {/* TODO: show selected task details */}
+      {selectedTask && <TaskDetailsView displayValues={selectedTask} />}
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={closeHandler}>
           Close
@@ -47,6 +48,8 @@ export default TaskDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 24,
+    backgroundColor: GlobalStyles.colors.primary800,
   },
   buttons: {
     flexDirection: "row",

@@ -92,7 +92,7 @@ function TaskForm(
         label="Title"
         invalid={!inputs.title.isValid}
         textInputConfig={{
-          maxLength: 100,
+          maxLength: 50,
           onChangeText: inputChangedHandler.bind(this, "title"),
           value: inputs.title.value,
         }}

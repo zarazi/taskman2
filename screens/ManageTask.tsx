@@ -26,11 +26,6 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
     });
   }, [navigation, isEditing]);
 
-  function deleteTaskHandler() {
-    if (isEditing) tasksCtx.deleteTask(editedTaskId);
-    navigation.goBack();
-  }
-
   function cancelHandler() {
     navigation.goBack();
   }
@@ -52,17 +47,6 @@ function ManageTask({ route, navigation }: ManageTaskProps) {
         onSubmit={confirmHandler}
         defaultValues={selectedTask}
       />
-      {/* TODO: fix orphan delete by moving delete button to task list item instead */}
-      {isEditing && (
-        <View style={styles.deleteContainer}>
-          <IconButton
-            name="trash"
-            color={GlobalStyles.colors.error500}
-            size={36}
-            onPress={deleteTaskHandler}
-          />
-        </View>
-      )}
     </View>
   );
 }
